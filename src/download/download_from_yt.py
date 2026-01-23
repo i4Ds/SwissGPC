@@ -2,7 +2,8 @@ import os
 import time
 
 from pytubefix import Playlist, YouTube
-from pytubefix.exceptions import VideoUnavailable
+from pytubefix.exceptions import RegexMatchError, VideoUnavailable
+from pytubefix.extract import video_id
 from pytubefix.helpers import reset_cache
 
 from src.download.utils import get_downloaded_metadata, save_podcast_metadata_to_csv, logger, \
@@ -45,6 +46,9 @@ existing_podcasts = [
 
 
 def download_yt_podcast_metadata(podcast: str, url: str, skip: bool = True) -> None:
+    if not url:
+        raise ValueError(f"Missing YouTube playlist URL for podcast '{podcast}'")
+
     saved_podcasts = get_downloaded_metadata()
 
     if skip and f"{podcast}.csv" in saved_podcasts:
@@ -52,17 +56,40 @@ def download_yt_podcast_metadata(podcast: str, url: str, skip: bool = True) -> N
         return
 
     episodes = []
-    pl = Playlist(url)
-    for i, video in enumerate(pl.videos):
-        episodes.append({
-            "id": video.video_id,
-            "title": video.title,
-            "description": video.description if video.description else "NO_DESCRIPTION",
-            "date_published": str(video.publish_date),
-            "duration_s": video.length,
-            "age_restricted": video.age_restricted,
-            "url": video.watch_url
-        })
+    pl = Playlist(url, 'WEB')
+    logger.info(f"Downloading metadata for podcast {podcast} with {pl.length} episodes.")
+    for i, video_url in enumerate(pl.video_urls):
+        try:
+            try:
+                _ = video_id(video_url)
+            except RegexMatchError as e:
+                logger.error(
+                    "Skipping invalid YouTube URL for podcast '%s': %s. Error: %s",
+                    podcast,
+                    video_url,
+                    str(e),
+                )
+                continue
+
+            video = YouTube(video_url)
+            episodes.append({
+                "id": video.video_id,
+                "title": video.title,
+                "description": video.description if video.description else "NO_DESCRIPTION",
+                "date_published": str(video.publish_date),
+                "duration_s": video.length,
+                "age_restricted": video.age_restricted,
+                "url": video.watch_url
+            })
+        except RegexMatchError as e:
+            logger.error(
+                "Playlist parsing failed for podcast '%s'. URL: %s. Playlist: %s. Error: %s",
+                podcast,
+                video_url,
+                url,
+                str(e),
+            )
+            raise
 
     save_podcast_metadata_to_csv(podcast, episodes)
     logger.info(f"Expected number of podcasts: {pl.length}, saved {len(episodes)}")

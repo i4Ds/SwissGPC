@@ -1,0 +1,7 @@
+[Unit]
+Description=SRF job (uv run)
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/vincenzo/SwissGPC
+ExecStart=/usr/bin/env bash -lc 'uv run --env-file .env python main.py --config config_srf.yaml'

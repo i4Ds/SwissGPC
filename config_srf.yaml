@@ -1,0 +1,67 @@
+source: "srf"
+data_root: "/mnt/nas05/data02/vincenzo/podcast_data/srf"
+podcasts:
+  - "Besserwisser"
+  - "Blick in die Feuilletons"
+  - "Literaturclub Buchtipps"
+  - "Die verflixte Gebrauchsanweisung"
+  - "Echo der Zeit"
+  - "Einfach Politik"
+  - "Es geschah am... Postraub des Jahrhunderts"
+  - "Espresso"
+  - "Focus"
+  - "Forum"
+  - "Grauen"
+  - "Input"
+  - "Kontext"
+  - "Krimi"
+  - "Kultur kompakt"
+  - "News Plus"
+  - "Persönlich"
+  - "Perspektiven"
+  - "Politikum"
+  - "Ratgeber"
+  - "Rehmann"
+  - "Trend"
+  - "Trüffelschweine"
+  - "Wetter"
+  - "WortSchatz"
+  - "Zeitblende"
+  - "Schweizerdeutsch hat keine Zukunft!"
+  - "Debriefing 404"
+  - "Digital Podcast"
+  - "Dini Mundart"
+  - "Gast am Mittag"
+  - "Geek-Sofa"
+  - "Pipifax"
+  - "Podcast am Pistenrand"
+  - "Samstagsrundschau"
+  - "#SRFglobal"
+  - "Sykora Gisler"
+  - "Tagesgespräch"
+  - "Ufwärmrundi"
+  - "Vetters Töne"
+  - "Wetterfrage"
+  - "Zivadiliring"
+  - "Zytlupe"
+  - "100 Sekunden Wissen"
+  - "Kultur-Talk"
+  - "Kopf voran"
+  - "Literaturclub: Zwei mit Buch"
+  - "Medientalk"
+  - "Sternstunde Philosophie"
+  - "Sternstunde Religion"
+  - "Wirtschaftswoche"
+  - "Wissenschaftsmagazin"
+
+write_attrs_to_hdf5: false
+
+steps:
+  download: true
+  diarization: false
+  segmentation: false
+  phon_transcription: false
+  dialect_classification: false
+  ch_transcription: false
+  mel_spectrogram: false
+  move_into_dialect_h5: false

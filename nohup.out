@@ -1,0 +1,114 @@
+2026-01-23 17:54:53,763 - INFO - __main__ - Started
+2026-01-23 17:54:54,946 - DEBUG - h5py._conv - Creating converter from 7 to 5
+2026-01-23 17:54:54,946 - DEBUG - h5py._conv - Creating converter from 5 to 7
+2026-01-23 17:54:54,946 - DEBUG - h5py._conv - Creating converter from 7 to 5
+2026-01-23 17:54:54,946 - DEBUG - h5py._conv - Creating converter from 5 to 7
+/home/vincenzo/SwissGPC/.venv/lib/python3.12/site-packages/pydub/utils.py:170: RuntimeWarning: Couldn't find ffmpeg or avconv - defaulting to ffmpeg, but may not work
+  warn("Couldn't find ffmpeg or avconv - defaulting to ffmpeg, but may not work", RuntimeWarning)
+2026-01-23 17:54:55,000 - DEBUG - matplotlib - matplotlib data path: /home/vincenzo/SwissGPC/.venv/lib/python3.12/site-packages/matplotlib/mpl-data
+2026-01-23 17:54:55,003 - DEBUG - matplotlib - CONFIGDIR=/home/vincenzo/.config/matplotlib
+2026-01-23 17:54:55,003 - DEBUG - matplotlib - interactive is False
+2026-01-23 17:54:55,003 - DEBUG - matplotlib - platform is linux
+2026-01-23 17:54:55,017 - DEBUG - matplotlib - CACHEDIR=/home/vincenzo/.cache/matplotlib
+2026-01-23 17:54:55,017 - DEBUG - matplotlib.font_manager - Using fontManager instance from /home/vincenzo/.cache/matplotlib/fontlist-v390.json
+2026-01-23 17:54:56,887 - INFO - __main__ - Transcribing Podcast Ein Buch Ein Tee from youtube.
+2026-01-23 17:54:56,888 - WARNING - src.download.utils - Podcast Ein Buch Ein Tee already downloaded
+2026-01-23 17:54:56,893 - DEBUG - pytubefix.helpers - Cache directory '/home/vincenzo/SwissGPC/.venv/lib/python3.12/site-packages/pytubefix/__cache__' does not exist.
+2026-01-23 17:54:56,894 - DEBUG - pytubefix.helpers - matched regex search: (?:v=|\/)([0-9A-Za-z_-]{11}).*
+2026-01-23 17:54:56,894 - DEBUG - pytubefix.__main__ - Looking for visitorData in InnerTube API
+2026-01-23 17:54:57,054 - DEBUG - pytubefix.__main__ - VisitorData obtained successfully
+2026-01-23 17:54:57,181 - WARNING - pytubefix.__main__ - ANDROID_VR client returned: This video is not available
+2026-01-23 17:54:57,181 - WARNING - pytubefix.__main__ - Switching to client: TV
+2026-01-23 17:54:58,392 - DEBUG - pytubefix.extract - finding initial function name
+2026-01-23 17:54:58,393 - DEBUG - pytubefix.extract - Pattern failed: ytplayer\.config\s*=\s*
+2026-01-23 17:54:58,393 - DEBUG - pytubefix.extract - Could not parse object.
+2026-01-23 17:54:58,398 - DEBUG - pytubefix.extract - finished regex search, matched: (/s/player/[\w\d]+/[\w\d_/.]+/base\.js)
+2026-01-23 17:54:58,485 - DEBUG - pytubefix.helpers - matched regex search: signatureTimestamp:(\d*)
+2026-01-23 17:54:58,585 - ERROR - src.download.utils - Did not download: FF4-0V17Nlo for Ein Buch Ein Tee because video was not available: FF4-0V17Nlo This request was detected as a bot. Use `use_po_token=True` or switch to WEB client to view. See more details at https://github.com/JuanBindez/pytubefix/pull/209
+2026-01-23 17:54:58,585 - DEBUG - pytubefix.helpers - Cache directory '/home/vincenzo/SwissGPC/.venv/lib/python3.12/site-packages/pytubefix/__cache__' does not exist.
+2026-01-23 17:54:58,585 - DEBUG - pytubefix.helpers - matched regex search: (?:v=|\/)([0-9A-Za-z_-]{11}).*
+2026-01-23 17:54:58,585 - DEBUG - pytubefix.__main__ - Looking for visitorData in InnerTube API
+2026-01-23 17:54:58,773 - DEBUG - pytubefix.__main__ - VisitorData obtained successfully
+2026-01-23 17:54:58,864 - WARNING - pytubefix.__main__ - ANDROID_VR client returned: This video is not available
+2026-01-23 17:54:58,864 - WARNING - pytubefix.__main__ - Switching to client: TV
+2026-01-23 17:54:59,554 - DEBUG - pytubefix.extract - finding initial function name
+2026-01-23 17:54:59,555 - DEBUG - pytubefix.extract - Pattern failed: ytplayer\.config\s*=\s*
+2026-01-23 17:54:59,555 - DEBUG - pytubefix.extract - Could not parse object.
+2026-01-23 17:54:59,560 - DEBUG - pytubefix.extract - finished regex search, matched: (/s/player/[\w\d]+/[\w\d_/.]+/base\.js)
+2026-01-23 17:54:59,561 - DEBUG - pytubefix.helpers - matched regex search: signatureTimestamp:(\d*)
+2026-01-23 17:54:59,647 - ERROR - src.download.utils - Did not download: bQuOsj74Wa4 for Ein Buch Ein Tee because video was not available: bQuOsj74Wa4 This request was detected as a bot. Use `use_po_token=True` or switch to WEB client to view. See more details at https://github.com/JuanBindez/pytubefix/pull/209
+2026-01-23 17:54:59,647 - DEBUG - pytubefix.helpers - Cache directory '/home/vincenzo/SwissGPC/.venv/lib/python3.12/site-packages/pytubefix/__cache__' does not exist.
+2026-01-23 17:54:59,647 - DEBUG - pytubefix.helpers - matched regex search: (?:v=|\/)([0-9A-Za-z_-]{11}).*
+2026-01-23 17:54:59,647 - DEBUG - pytubefix.__main__ - Looking for visitorData in InnerTube API
+2026-01-23 17:54:59,742 - DEBUG - pytubefix.__main__ - VisitorData obtained successfully
+2026-01-23 17:54:59,821 - WARNING - pytubefix.__main__ - ANDROID_VR client returned: This video is not available
+2026-01-23 17:54:59,821 - WARNING - pytubefix.__main__ - Switching to client: TV
+2026-01-23 17:55:00,747 - DEBUG - pytubefix.extract - finding initial function name
+2026-01-23 17:55:00,747 - DEBUG - pytubefix.extract - Pattern failed: ytplayer\.config\s*=\s*
+2026-01-23 17:55:00,747 - DEBUG - pytubefix.extract - Could not parse object.
+2026-01-23 17:55:00,752 - DEBUG - pytubefix.extract - finished regex search, matched: (/s/player/[\w\d]+/[\w\d_/.]+/base\.js)
+2026-01-23 17:55:00,752 - DEBUG - pytubefix.helpers - matched regex search: signatureTimestamp:(\d*)
+2026-01-23 17:55:00,870 - ERROR - src.download.utils - Did not download: kqE1RlLpEzE for Ein Buch Ein Tee because video was not available: kqE1RlLpEzE This request was detected as a bot. Use `use_po_token=True` or switch to WEB client to view. See more details at https://github.com/JuanBindez/pytubefix/pull/209
+2026-01-23 17:55:00,873 - DEBUG - pytubefix.helpers - Cache directory '/home/vincenzo/SwissGPC/.venv/lib/python3.12/site-packages/pytubefix/__cache__' does not exist.
+2026-01-23 17:55:00,873 - DEBUG - pytubefix.helpers - matched regex search: (?:v=|\/)([0-9A-Za-z_-]{11}).*
+2026-01-23 17:55:00,873 - DEBUG - pytubefix.__main__ - Looking for visitorData in InnerTube API
+2026-01-23 17:55:01,024 - DEBUG - pytubefix.__main__ - VisitorData obtained successfully
+2026-01-23 17:55:01,152 - DEBUG - pytubefix.extract - applying descrambler
+2026-01-23 17:55:01,153 - DEBUG - pytubefix.__main__ - Found title in vid_info
+2026-01-23 17:55:01,153 - DEBUG - pytubefix.streams - downloading (24883082 total bytes) file to /mnt/nas05/data02/vincenzo/podcast_data/Ein Buch Ein Tee/BeTq8VJA4o4.mp3
+2026-01-23 17:55:03,578 - DEBUG - pytubefix.streams - download remaining: 15445898
+2026-01-23 17:55:04,900 - DEBUG - pytubefix.streams - download remaining: 6008714
+2026-01-23 17:55:05,335 - DEBUG - pytubefix.streams - download remaining: 0
+2026-01-23 17:55:05,362 - DEBUG - pytubefix.streams - download finished
+2026-01-23 17:55:05,512 - INFO - src.download.utils - Downloaded #5: Buch: Die schöne Schwester Langeweile (Peter Bichsel) / Tee: Grüntee mit Birkenblätter for Ein Buch Ein Tee.
+2026-01-23 17:55:05,513 - DEBUG - pytubefix.helpers - Cache directory '/home/vincenzo/SwissGPC/.venv/lib/python3.12/site-packages/pytubefix/__cache__' does not exist.
+2026-01-23 17:55:05,513 - DEBUG - pytubefix.helpers - matched regex search: (?:v=|\/)([0-9A-Za-z_-]{11}).*
+2026-01-23 17:55:05,513 - DEBUG - pytubefix.__main__ - Looking for visitorData in InnerTube API
+2026-01-23 17:55:05,671 - DEBUG - pytubefix.__main__ - VisitorData obtained successfully
+2026-01-23 17:55:05,971 - DEBUG - pytubefix.extract - applying descrambler
+2026-01-23 17:55:05,971 - DEBUG - pytubefix.__main__ - Found title in vid_info
+2026-01-23 17:55:05,971 - DEBUG - pytubefix.streams - downloading (18657677 total bytes) file to /mnt/nas05/data02/vincenzo/podcast_data/Ein Buch Ein Tee/537hoXX-eR8.mp3
+2026-01-23 17:55:09,660 - DEBUG - pytubefix.streams - download remaining: 9220493
+2026-01-23 17:55:12,242 - DEBUG - pytubefix.streams - download remaining: 0
+2026-01-23 17:55:12,263 - DEBUG - pytubefix.streams - download finished
+2026-01-23 17:55:12,413 - INFO - src.download.utils - Downloaded #4: "Die Dinge beim Namen" – Rebekka Salms preisgekrönter Schweizer Gesellschaftsroman | Literatu... for Ein Buch Ein Tee.
+2026-01-23 17:55:12,414 - DEBUG - pytubefix.helpers - Cache directory '/home/vincenzo/SwissGPC/.venv/lib/python3.12/site-packages/pytubefix/__cache__' does not exist.
+2026-01-23 17:55:12,414 - DEBUG - pytubefix.helpers - matched regex search: (?:v=|\/)([0-9A-Za-z_-]{11}).*
+2026-01-23 17:55:12,414 - DEBUG - pytubefix.__main__ - Looking for visitorData in InnerTube API
+2026-01-23 17:55:12,527 - DEBUG - pytubefix.__main__ - VisitorData obtained successfully
+2026-01-23 17:55:12,650 - DEBUG - pytubefix.extract - applying descrambler
+2026-01-23 17:55:12,651 - DEBUG - pytubefix.__main__ - Found title in vid_info
+2026-01-23 17:55:12,651 - DEBUG - pytubefix.streams - downloading (58671856 total bytes) file to /mnt/nas05/data02/vincenzo/podcast_data/Ein Buch Ein Tee/6NVM-7nc2Mk.mp3
+2026-01-23 17:55:14,195 - DEBUG - pytubefix.streams - download remaining: 49234672
+2026-01-23 17:55:15,487 - DEBUG - pytubefix.streams - download remaining: 39797488
+2026-01-23 17:55:16,611 - DEBUG - pytubefix.streams - download remaining: 30360304
+Traceback (most recent call last):
+  File "/home/vincenzo/SwissGPC/main.py", line 118, in <module>
+    main(args.config)
+  File "/home/vincenzo/SwissGPC/main.py", line 109, in main
+    _process_podcast_steps(podcast_name, "youtube", config, youtube_url=youtube_url)
+  File "/home/vincenzo/SwissGPC/main.py", line 43, in _process_podcast_steps
+    download_yt_podcast_audio(podcast_name)
+  File "/home/vincenzo/SwissGPC/src/download/download_from_yt.py", line 84, in download_yt_podcast_audio
+    y.streams.get_audio_only().download(output_path=podcast_path, filename=f"{metadata['id']}.mp3",
+  File "/home/vincenzo/SwissGPC/.venv/lib/python3.12/site-packages/pytubefix/streams.py", line 366, in download
+    for chunk in request.stream(
+  File "/home/vincenzo/SwissGPC/.venv/lib/python3.12/site-packages/pytubefix/request.py", line 185, in stream
+    chunk = response.read()
+            ^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/http/client.py", line 500, in read
+    s = self._safe_read(self.length)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/http/client.py", line 646, in _safe_read
+    data = self.fp.read(cursize)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/socket.py", line 707, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/ssl.py", line 1252, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/ssl.py", line 1104, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
