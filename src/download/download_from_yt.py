@@ -1,5 +1,6 @@
 import os
 import time
+import pandas as pd
 
 from pytubefix import Playlist, YouTube
 from pytubefix.exceptions import RegexMatchError, VideoUnavailable
@@ -56,7 +57,7 @@ def download_yt_podcast_metadata(podcast: str, url: str, skip: bool = True) -> N
         return
 
     episodes = []
-    pl = Playlist(url, 'WEB')
+    pl = Playlist(url, 'WEB_EMBED')
     logger.info(f"Downloading metadata for podcast {podcast} with {pl.length} episodes.")
     for i, video_url in enumerate(pl.video_urls):
         try:
@@ -71,7 +72,7 @@ def download_yt_podcast_metadata(podcast: str, url: str, skip: bool = True) -> N
                 )
                 continue
 
-            video = YouTube(video_url)
+            video = _create_youtube_with_fallback(video_url)
             episodes.append({
                 "id": video.video_id,
                 "title": video.title,
@@ -81,6 +82,14 @@ def download_yt_podcast_metadata(podcast: str, url: str, skip: bool = True) -> N
                 "age_restricted": video.age_restricted,
                 "url": video.watch_url
             })
+        except VideoUnavailable as e:
+            logger.error(
+                "Video unavailable for podcast '%s': %s. Error: %s",
+                podcast,
+                video_url,
+                str(e),
+            )
+            continue
         except RegexMatchError as e:
             logger.error(
                 "Playlist parsing failed for podcast '%s'. URL: %s. Playlist: %s. Error: %s",
@@ -106,13 +115,31 @@ def download_yt_podcast_audio(podcast: str) -> None:
         reset_cache()
 
         try:
-            y = YouTube(metadata["url"])
+            y = _create_youtube_with_fallback(metadata["url"])
             y.streams.get_audio_only().download(output_path=podcast_path, filename=f"{metadata['id']}.mp3",
                                                 max_retries=4)
             time.sleep(0.15)
         except VideoUnavailable as e:
             logger.error(f"Did not download: {metadata['id']} for {podcast} because video was not available: {str(e)}")
+            if 'url' in metadata and pd.notna(metadata['url']):
+                logger.error(f"Video URL: {metadata['url']}")
             continue
 
         logger.info(f"Downloaded {metadata['title']} for {podcast}.")
     logger.info(f"Finished downloading {podcast}.")
+
+
+def _create_youtube_with_fallback(url: str) -> YouTube:
+    clients = ("ANDROID", "IOS", "WEB", "WEB_EMBED")
+    last_exc: Exception | None = None
+
+    for client in clients:
+        try:
+            return YouTube(url, client)
+        except (VideoUnavailable, RegexMatchError) as e:
+            last_exc = e
+            continue
+
+    if last_exc is not None:
+        raise last_exc
+    raise VideoUnavailable(f"Unable to create YouTube client for url: {url}")
