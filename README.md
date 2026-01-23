@@ -78,6 +78,20 @@ to do every step in batch and should not be too much effort to do so. Controllin
 from which source and which pipeline steps should run. See the table below for more information about the parameters. We utilized hdf5 files
 in our setup, and as such all data is put into hdf5 files on segmentation. This can be changed to your setup accordingly.
 
+## Setup (uv)
+Create the environment and install dependencies with uv:
+
+```bash
+uv venv
+uv sync
+```
+
+Run the pipeline:
+
+```bash
+uv run python main.py --config config.yaml
+```
+
 | **Config parameter**      | **Description**                                                                   | **Example value for SRF** | **Example Value for YT**                                                 |
 |---------------------------|-----------------------------------------------------------------------------------|---------------------------|--------------------------------------------------------------------------|
 | source                    | Defines the source of the podcast (either YT or SRF)                              | "srf"                     | "yt"                                                                     |

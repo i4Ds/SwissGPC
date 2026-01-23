@@ -1,6 +1,7 @@
 import os
 
 import pandas as pd
+from pandas.errors import EmptyDataError
 
 from src.utils.logger import get_logger
 from src.utils.paths import PODCAST_METADATA_FOLDER, PODCAST_AUDIO_FOLDER
@@ -15,7 +16,16 @@ def save_podcast_metadata_to_csv(podcast: str, episodes: list) -> None:
 
 def load_podcast_metadata_from_csv(podcast: str) -> pd.DataFrame:
     podcast = podcast if podcast.endswith(".csv") else podcast + ".csv"
-    return pd.read_csv(os.path.join(PODCAST_METADATA_FOLDER, podcast), encoding="utf-8", sep=";")
+    path = os.path.join(PODCAST_METADATA_FOLDER, podcast)
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"Missing podcast metadata file: {path}")
+    if os.path.getsize(path) == 0:
+        raise EmptyDataError(f"Empty podcast metadata file: {path}")
+    try:
+        return pd.read_csv(path, encoding="utf-8", sep=";")
+    except EmptyDataError:
+        logger.error("Empty podcast metadata file: %s", path, exc_info=True)
+        raise
 
 
 def create_audio_folder_if_not_exists(podcast):

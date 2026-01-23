@@ -1,6 +1,5 @@
 import base64
 import json
-import os
 import time
 
 import requests
@@ -8,9 +7,10 @@ import requests
 from src.download.utils import save_podcast_metadata_to_csv, load_podcast_metadata_from_csv, \
     create_audio_folder_if_not_exists, PODCAST_METADATA_FOLDER, PODCAST_AUDIO_FOLDER, get_downloaded_metadata
 from src.utils.logger import get_logger
+import os
 
-CONSUMER_KEY = "YOUR_CONSUMER_KEY"
-CONSUMER_SECRET = "YOUR_CONSUMER_KEY"
+CONSUMER_KEY = os.getenv("SRF_CONSUMER_KEY", "YOUR_CONSUMER_KEY")
+CONSUMER_SECRET = os.getenv("SRF_CONSUMER_SECRET", "YOUR_CONSUMER_SECRET")
 AUTH_TOKEN = base64.b64encode(f"{CONSUMER_KEY}:{CONSUMER_SECRET}".encode()).decode()
 
 URL_BASE = "https://api.srgssr.ch"
@@ -45,7 +45,8 @@ new_podcasts = [
     "Trüffelschweine",
     "Wetter",
     "WortSchatz",
-    "Zeitblende"
+    "Zeitblende",
+    "Schweizerdeutsch hat keine Zukunft!"
 ]
 
 existing_podcasts = [  # 17278872.0 seconds
@@ -123,6 +124,8 @@ def process_srf_podcast(podcast: str) -> None:
 
 
 def download_srf_podcast_metadata(podcast: str, skip: bool = True) -> None:
+    if not podcast or not podcast.strip():
+        raise ValueError("podcast name is empty; set 'podcast_name' in config.yaml")
     os.makedirs(PODCAST_METADATA_FOLDER, exist_ok=True)
     url = URL_AUDIOS + "/audios/search"
 
@@ -151,7 +154,7 @@ def download_srf_podcast_metadata(podcast: str, skip: bool = True) -> None:
     episodes = []
     total_episodes = json_response["total"]
     logger.info(f"Getting podcast {podcast} with total number of episodes: {json_response['total']}")
-    episodes.extend(_collect_metadata(json_response["searchResultListMedia"], podcast))
+    episodes.extend(_collect_metadata(json_response["searchResultMediaList"], podcast))
 
     while "next" in json_response:
         params["next"] = json_response["next"].split("?")[1].replace("next=", "").split("&")[0]
@@ -161,13 +164,23 @@ def download_srf_podcast_metadata(podcast: str, skip: bool = True) -> None:
         except Exception as e:
             logger.error(str(e))
             break
-        episodes.extend(_collect_metadata(json_response["searchResultListMedia"], podcast))
+        episodes.extend(_collect_metadata(json_response["searchResultMediaList"], podcast))
 
-    save_podcast_metadata_to_csv(podcast, episodes)
-    logger.info(f"Expected number of podcasts: {total_episodes}, saved {len(episodes)}")
+        if not episodes:
+            logger.error(
+                "No episodes collected for %s. Expected %s episodes from SRF response.",
+                podcast,
+                total_episodes,
+            )
+            raise RuntimeError("No episodes collected from SRF API response.")
+
+        save_podcast_metadata_to_csv(podcast, episodes)
+        logger.info(f"Expected number of podcasts: {total_episodes}, saved {len(episodes)}")
 
 
 def download_srf_podcast_audio(podcast: str) -> None:
+    if not podcast or not podcast.strip():
+        raise ValueError("podcast name is empty; set 'podcast_name' in config.yaml")
     df = load_podcast_metadata_from_csv(podcast)
     create_audio_folder_if_not_exists(podcast)
 
