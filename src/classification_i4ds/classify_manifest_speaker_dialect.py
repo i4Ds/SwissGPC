@@ -63,6 +63,12 @@ def parse_args() -> argparse.Namespace:
         ),
     )
     parser.add_argument(
+        "--manifest-output-mode",
+        choices=["minimal", "full"],
+        default="minimal",
+        help="minimal writes only key path/speaker fields + dialect outputs; full copies all input fields",
+    )
+    parser.add_argument(
         "--phoneme-field",
         default="phonemes",
         help="manifest field containing phoneme text (if present, preferred input)",
@@ -386,7 +392,15 @@ def main() -> None:
             source_key = normalize_source_key(rec, args.source_field)
             group_key = (source_key, speaker)
 
-            out = dict(rec)
+            if args.manifest_output_mode == "full":
+                out = dict(rec)
+            else:
+                out = {
+                    "audio_path": rec.get(args.audio_field),
+                    args.source_field: rec.get(args.source_field, source_key),
+                    args.speaker_field: speaker,
+                    "text": rec.get("text"),
+                }
             segment_label = segment_preds[idx]
             majority_label_id = majority_by_group[group_key]
             out["dialect_segment"] = segment_label

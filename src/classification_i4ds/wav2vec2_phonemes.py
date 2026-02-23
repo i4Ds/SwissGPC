@@ -32,9 +32,7 @@ class Wav2Vec2PhonemeExtractor:
         # Fix for bug:
         feature_extractor = AutoFeatureExtractor.from_pretrained(self.model_name)
         tokenizer = Wav2Vec2CTCTokenizer.from_pretrained(self.model_name)
-
-        print(type(tokenizer), tokenizer)
-
+        
         if self.device == "auto":
             self.device = "cuda" if self._torch.cuda.is_available() else "cpu"
         self.processor = self._Wav2Vec2Processor(feature_extractor=feature_extractor, tokenizer=tokenizer)
