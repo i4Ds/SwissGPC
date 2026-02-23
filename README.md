@@ -82,8 +82,8 @@ in our setup, and as such all data is put into hdf5 files on segmentation. This 
 Create the environment and install dependencies with uv:
 
 ```bash
-uv venv
-uv sync
+uv venv          # create a virtual environment
+uv sync          # install dependencies defined in pyproject.toml
 ```
 
 Run the pipeline:
@@ -92,16 +92,24 @@ Run the pipeline:
 uv run python main.py --config config.yaml
 ```
 
-| **Config parameter**      | **Description**                                                                   | **Example value for SRF** | **Example Value for YT**                                                 |
-|---------------------------|-----------------------------------------------------------------------------------|---------------------------|--------------------------------------------------------------------------|
-| source                    | Defines the source of the podcast (either YT or SRF)                              | "srf"                     | "yt"                                                                     |
-| youtube_url               | YouTube link to a **Playlist** containing the podcast episodes                    | ""                        | https://www.youtube.com/playlist?list=PLGJjtm2tSyhQXU-_N2YkfqCffXhY6UHNe |
-| podcast_name              | Name of podcast as provided by authors                                            | "Zivadiliring"            | "Finanz Fabio"                                                           |
-| write_attrs_to_hdf5       | Should attributes (i.e. annotated data) be added to the hdf5 files                | false                     | false                                                                    |
-| steps/download            | False/True: Should download step be executed                                      | true                      | true                                                                     |
-| steps/diarization         | False/True: Should diarization step be executed                                   | true                      | true                                                                     |
-| steps/segmentation        | False/True: Should segmentation step be executed                                  | true                      | true                                                                     |
-| steps/phon_transcription  | False/True: Should phoneme transcription step be executed                         | true                      | true                                                                     |
-| steps/ch_transcription    | False/True: Should dialect classification step be executed                        | false                     | false                                                                    |
-| steps/mel_spectogram      | False/True: Should mel spectrogram generation step be executed                    | false                     | false                                                                    |
-| steps/move_into_dialect_5 | False/True: Should audio be moved from podcast-based hdf5 to unified dialect hdf5 | false                     | false                                                                    |
+### Classifying individual files
+
+A lightweight CLI helper is provided that loads the saved logistic‑regression
+pipeline and runs it on either phoneme transcripts or raw audio files.  To use
+it you first need to have the uv environment active (see above); the necessary
+requirements (`whisperx`, `phonemizer`, `scikit-learn`, etc.) are already listed
+in `pyproject.toml`.
+
+```bash
+# classify two phoneme transcripts
+uv run python -m src.classification_i4ds.classify_dialect path/utt1.phon path/utt2.phon
+
+# classify audio files (requires whisperx + phonemizer)
+uv run python -m src.classification_i4ds.classify_dialect audio1.wav audio2.wav \
+     --output predictions.csv
+```
+
+The script prints a tab-separated summary and optionally writes a CSV if
+`--output` is supplied.  Internally it calls
+:meth:`src.classification_i4ds.best_dialect_model.load_model` and feeds the
+input through the same preprocessing used during training.
